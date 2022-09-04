@@ -1,10 +1,10 @@
 package com.azurita.azuritaweb.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "OrderDetails")
@@ -17,14 +17,22 @@ public class OrderDetails {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "order_id")
-    private Order order;
+    private PurchaseOrder purchaseOrder;
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "product_id")
+    @MapsId("productId")
+    @JoinColumns({
+            @JoinColumn(name = "product_id"),
+            @JoinColumn(name = "size")
+    })
     private Product product;
 
+    @NotNull
+    @Column(nullable = false)
     private Double unitPrice;
 
+    @NotNull
+    @Column(nullable = false)
     private Integer quantity;
 }

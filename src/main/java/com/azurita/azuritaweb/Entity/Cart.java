@@ -1,10 +1,12 @@
 package com.azurita.azuritaweb.Entity;
 
-import com.azurita.azuritaweb.Security.Entity.User;
+import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,9 +18,9 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    private User user;
+    private Customer customer;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cart")
     @JsonManagedReference
-    private Set<CartDetails> cartDetails;
+    private Set<CartDetails> cartDetails = new HashSet<>();
 }

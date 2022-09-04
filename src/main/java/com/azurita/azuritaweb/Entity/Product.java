@@ -8,28 +8,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@IdClass(ProductId.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @Id
+    @EmbeddedId
     private ProductId productId;
 
     @NotNull
+    @Column(nullable = false)
     private Double price;
 
     @NotNull
+    @Column(nullable = false)
     private Integer stock;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference
-    private Set<CartDetails> cartDetails;
+    private Set<CartDetails> cartDetails = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "product_details_id")
+    @OneToOne(cascade = CascadeType.ALL)
     private ProductDetails productDetails;
 }
