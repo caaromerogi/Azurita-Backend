@@ -1,11 +1,17 @@
 package com.azurita.azuritaweb.Entity;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ProductDetails")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class ProductDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

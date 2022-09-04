@@ -2,12 +2,16 @@ package com.azurita.azuritaweb.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "OrderDetails")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class OrderDetails {
     @Id
@@ -15,12 +19,12 @@ public class OrderDetails {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "purchase-orderdetails")
     @JoinColumn(name = "order_id")
     private PurchaseOrder purchaseOrder;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "product-orderdetails")
     @MapsId("productId")
     @JoinColumns({
             @JoinColumn(name = "product_id"),

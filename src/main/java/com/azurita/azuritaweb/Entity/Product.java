@@ -28,9 +28,13 @@ public class Product {
     private Integer stock;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonManagedReference
+    @JsonManagedReference(value = "product-cartdetails")
     private Set<CartDetails> cartDetails = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private ProductDetails productDetails;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "product-orderdetails")
+    private Set<OrderDetails> orderDetails = new HashSet<>();
 }

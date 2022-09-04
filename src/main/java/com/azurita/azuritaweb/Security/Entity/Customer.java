@@ -3,6 +3,9 @@ package com.azurita.azuritaweb.Security.Entity;
 import com.azurita.azuritaweb.Entity.PurchaseOrder;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Customer")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +39,7 @@ public class Customer {
 
     @NotNull
     @Column(nullable = false)
-    private String DNI;
+    private String dni;
 
 
     @ManyToMany
@@ -42,6 +48,6 @@ public class Customer {
     private Set<Role> role = new HashSet<>();
 
     @OneToMany(mappedBy = "customer")
-    @JsonManagedReference
+    @JsonManagedReference(value = "customer-purchaseorder")
     private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
 }
