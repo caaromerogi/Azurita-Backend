@@ -4,6 +4,7 @@ import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.azurita.azuritaweb.Security.Entity.MainCustomer;
 import com.azurita.azuritaweb.Security.Service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

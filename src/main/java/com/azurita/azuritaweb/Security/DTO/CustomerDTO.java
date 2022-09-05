@@ -34,4 +34,11 @@ public class CustomerDTO {
 
     private Set<PurchaseOrderDTO> purchaseOrders = new HashSet<>();
 
+    public CustomerDTO(String name, String lastName, String email, String password, String dni) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+    }
 }

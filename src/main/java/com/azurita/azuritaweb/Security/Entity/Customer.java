@@ -53,7 +53,15 @@ public class Customer {
     @JsonManagedReference(value = "customer-purchaseorder")
     private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    public Customer(String name, String lastName, String email, String dni, String password) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.dni = dni;
+        this.password = password;
+    }
 }

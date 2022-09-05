@@ -23,6 +23,7 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private int expiration;
 
+
     public String generateToken(Authentication authentication) {
         MainCustomer mainCustomer = (MainCustomer) authentication.getPrincipal();
 

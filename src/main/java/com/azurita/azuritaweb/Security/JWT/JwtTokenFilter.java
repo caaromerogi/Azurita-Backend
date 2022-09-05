@@ -22,10 +22,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     CustomerDetailsService customerDetailsService;
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
+
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
         try {
-            String token = getToken(req);
+            String token = this.getToken(req);
             if(token != null && jwtProvider.validateToken(token)){
                 String email = jwtProvider.getEmailFromToken(token);
                 UserDetails userDetails = customerDetailsService.loadUserByUsername(email);

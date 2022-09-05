@@ -35,4 +35,8 @@ public class CustomerService implements ICustomerService {
     public boolean existsByEmail(String email){
         return customerRepository.existsByEmail(email);
     }
+
+    public Customer saveCustomer(CustomerDTO customerDTO){
+        return customerRepository.save(modelMapper.map(customerDTO, Customer.class));
+    }
 }
