@@ -34,7 +34,7 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     private ProductDetails productDetails;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @JsonManagedReference(value = "product-orderdetails")
     private Set<OrderDetails> orderDetails = new HashSet<>();
 }
