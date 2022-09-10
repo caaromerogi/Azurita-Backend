@@ -38,7 +38,7 @@ public class PurchaseOrder {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     @JsonManagedReference(value = "purchase-orderdetails")
     private Set<OrderDetails> orderDetails = new HashSet<>();
 

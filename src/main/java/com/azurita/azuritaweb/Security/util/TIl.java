@@ -6,8 +6,6 @@ import com.azurita.azuritaweb.Security.enums.RoleName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-
 public class TIl implements CommandLineRunner {
 
     @Autowired
@@ -18,5 +16,7 @@ public class TIl implements CommandLineRunner {
 //        Role rolUSer = new Role(RoleName.ROLE_USER);
 //        roleRepository.save(rolAdmin);
 //        roleRepository.save(rolUSer);
+
+
     }
 }

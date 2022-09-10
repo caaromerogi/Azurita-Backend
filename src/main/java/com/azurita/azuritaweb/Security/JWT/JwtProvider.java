@@ -18,8 +18,9 @@ import java.util.Date;
 public class JwtProvider {
     private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    String base64Key = Encoders.BASE64.encode(key.getEncoded());
+    @Value("${jwt.secret}")
+    private String key;
+
     @Value("${jwt.expiration}")
     private int expiration;
 
@@ -30,19 +31,19 @@ public class JwtProvider {
         return Jwts.builder().setSubject(mainCustomer.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 1000))
-                .signWith(key)
+                .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
     }
 
     public String getEmailFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key)
-                .build().parseClaimsJwt(token)
+                .build().parseClaimsJws(token)
                 .getBody().getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJwt(token);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("Malformed token");

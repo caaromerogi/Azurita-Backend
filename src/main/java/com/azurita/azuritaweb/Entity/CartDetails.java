@@ -19,17 +19,13 @@ public class CartDetails {
     private Long id;
 
     @ManyToOne
-    @MapsId("productId")
     @JsonBackReference(value = "product-cartdetails")
-    @JoinColumns({
-            @JoinColumn(name = "product_id"),
-            @JoinColumn(name = "size")
-    })
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne
     @JsonBackReference(value = "cart-cartdetails")
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
     @NotNull

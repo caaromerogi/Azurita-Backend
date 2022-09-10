@@ -57,15 +57,17 @@ public class AuthController {
         if(customerService.existsByEmail(newCustomerDTO.getEmail())){
             return new ResponseEntity<>(new MessageDTO("El email ingresado ya existe"), HttpStatus.BAD_REQUEST);
         }
-        CustomerDTO customer = new CustomerDTO(newCustomerDTO.getName(), newCustomerDTO.getLastName(),
+        Customer customer = new Customer(newCustomerDTO.getName(), newCustomerDTO.getLastName(),
                 newCustomerDTO.getEmail(),
-                passwordEncoder.encode(newCustomerDTO.getPassword()),
-                newCustomerDTO.getDni());
-        Set<RoleDTO> roles = new HashSet<>();
+                newCustomerDTO.getDni(),
+                passwordEncoder.encode(newCustomerDTO.getPassword())
+                );
+        Set<Role> roles = new HashSet<>();
         roles.add(roleService.getByRoleName(RoleName.ROLE_USER));
         if(newCustomerDTO.getRoles().contains("admin")){
             roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN));
         }
+
         customer.setRole(roles);
         customerService.saveCustomer(customer);
 
@@ -77,12 +79,20 @@ public class AuthController {
         if(bindingResult.hasErrors()){
             return new ResponseEntity<>(new MessageDTO("Campos errados"), HttpStatus.BAD_REQUEST);
         }
-        Authentication authentication =
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginCustomerDTO.getEmail(),loginCustomerDTO.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtProvider.generateToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-        return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
+        if(customerService.getHashedPassword(loginCustomerDTO.getEmail())==null){
+            return new ResponseEntity<>(new MessageDTO("El email no existe o no concuerda con la contraseña ingresada"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        if(passwordEncoder.matches(loginCustomerDTO.getPassword(),customerService.getHashedPassword(loginCustomerDTO.getEmail()))){
+            Authentication authentication =
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginCustomerDTO.getEmail(),loginCustomerDTO.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtProvider.generateToken(authentication);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+            return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new MessageDTO("Contraseña errada"), HttpStatus.BAD_REQUEST);
     }
 }

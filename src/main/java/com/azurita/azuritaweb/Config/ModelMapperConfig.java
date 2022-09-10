@@ -14,14 +14,14 @@ public class ModelMapperConfig {
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();
-        PropertyMap<Product, ProductDTO> productMap = new PropertyMap<Product, ProductDTO>() {
-            @Override
-            protected void configure() {
-                map().setProductId(source.getProductId().getProductId());
-                map().setSize(source.getProductId().getSize());
-            }
-        };
-        modelMapper.addMappings(productMap);
+//        PropertyMap<Product, ProductDTO> productMap = new PropertyMap<Product, ProductDTO>() {
+//            @Override
+//            protected void configure() {
+//                map().setProductId(source.getProductId().getProductId());
+//                map().setSize(source.getProductId().getSize());
+//            }
+//        };
+//        modelMapper.addMappings(productMap);
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         return modelMapper;
     }

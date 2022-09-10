@@ -20,9 +20,9 @@ public class RoleService implements IRoleService {
     @Autowired
     ModelMapper modelMapper;
 
-    public RoleDTO getByRoleName(RoleName roleName) {
+    public Role getByRoleName(RoleName roleName) {
         if (roleRepository.findByRoleName(roleName).isPresent()) {
-            return modelMapper.map(roleRepository.findByRoleName(roleName).get(), RoleDTO.class);
+            return roleRepository.findByRoleName(roleName).get();
         }
         return null;
     }

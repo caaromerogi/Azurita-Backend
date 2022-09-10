@@ -14,12 +14,12 @@ public class ProductController {
     @Autowired
     IProductService productService;
 
-    @GetMapping("/findByProductId/{id}")
+    @GetMapping("/get/findByProductId/{id}")
     public ResponseEntity<List<ProductDTO>> getProductById(@PathVariable Long id){
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/createProduct")
+    @PostMapping("/create/createProduct")
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO){
         return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.ACCEPTED);
     }

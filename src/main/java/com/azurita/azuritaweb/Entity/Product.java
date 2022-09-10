@@ -1,6 +1,4 @@
 package com.azurita.azuritaweb.Entity;
-
-import com.azurita.azuritaweb.ID.ProductId;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -16,8 +14,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @EmbeddedId
-    private ProductId productId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productId;
 
     @NotNull
     @Column(nullable = false)
@@ -25,14 +25,20 @@ public class Product {
 
     @NotNull
     @Column(nullable = false)
-    private Integer stock;
+    private String imgPath;
+
+    @NotNull
+    @Column(nullable = false)
+    private String name;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference(value = "product-cartdetails")
     private Set<CartDetails> cartDetails = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private ProductDetails productDetails;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "size_id"))
+    private Set<SizeDetails> sizeDetails = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @JsonManagedReference(value = "product-orderdetails")

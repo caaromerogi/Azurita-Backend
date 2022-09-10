@@ -25,11 +25,7 @@ public class OrderDetails {
 
     @ManyToOne
     @JsonBackReference(value = "product-orderdetails")
-    @MapsId("productId")
-    @JoinColumns({
-            @JoinColumn(name = "product_id"),
-            @JoinColumn(name = "size")
-    })
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @NotNull

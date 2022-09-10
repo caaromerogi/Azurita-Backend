@@ -1,35 +1,36 @@
 package com.azurita.azuritaweb.Entity;
 
+import com.azurita.azuritaweb.Security.enums.SizeName;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "ProductDetails")
+@Table(name = "SizeDetails")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductDetails {
+public class SizeDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @Column(nullable = false)
-    private String imgPath;
+    @Enumerated(EnumType.STRING)
+    private SizeName size;
 
     @NotNull
     @Column(nullable = false)
-    private String description;
+    private Integer stock;
 
-    @MapsId("productId")
-    @OneToOne(mappedBy = "productDetails")
-    @JoinColumns({
-            @JoinColumn(name = "product_id"),
-            @JoinColumn(name = "size")
-    })
-    private Product product;
+    public SizeDetails(SizeName size, Integer stock) {
+        this.size = size;
+        this.stock = stock;
+    }
 }

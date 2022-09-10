@@ -36,7 +36,14 @@ public class CustomerService implements ICustomerService {
         return customerRepository.existsByEmail(email);
     }
 
-    public Customer saveCustomer(CustomerDTO customerDTO){
-        return customerRepository.save(modelMapper.map(customerDTO, Customer.class));
+    public Customer saveCustomer(Customer customerDTO){
+        return customerRepository.save(customerDTO);
+    }
+
+    public String getHashedPassword(String email){
+        if(!getByEmail(email).stream().findFirst().isPresent()){
+            return null;
+        }
+        return getByEmail(email).stream().findFirst().get().getPassword();
     }
 }
