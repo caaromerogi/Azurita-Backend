@@ -43,7 +43,7 @@ public class PurchaseOrder {
     private Set<OrderDetails> orderDetails = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     @JsonBackReference(value = "customer-purchaseorder")
     private Customer customer;
 }

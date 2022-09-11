@@ -77,6 +77,7 @@ public class ProductService implements IProductService {
     @Transactional
     @Override
     public void deleteProductById(Long id) {
+        //You should enter to the service NOT to the repository
         cartDetailsRepository.deleteByProductId(id);
         sizeRepository.deleteProductSizeById(id);
         productRepository.deleteById(id);

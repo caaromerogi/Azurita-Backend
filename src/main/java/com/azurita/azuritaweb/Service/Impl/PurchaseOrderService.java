@@ -1,4 +1,6 @@
 package com.azurita.azuritaweb.Service.Impl;
 
-public class PurchaseOrderService {
+import com.azurita.azuritaweb.Service.IPurchaseOrderService;
+
+public class PurchaseOrderService implements IPurchaseOrderService {
 }

@@ -6,10 +6,7 @@ import com.azurita.azuritaweb.Service.ICartDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,15 @@ public class CartDetailsController {
         return new ResponseEntity<>(cartDetailsService.addItem(cartDetailsDTO), HttpStatus.CREATED);
     }
 
+    //TESTEANDO PERO NO DEBEN SER IMPLEMENTADOS INTERNAMENTE
     @GetMapping("/get/getAllCartDetails")
     public ResponseEntity<List<CartDetails>> getAllCartDetails(){
         return new ResponseEntity<>(cartDetailsService.getAllCartDetails(), HttpStatus.OK);
     }
+
+    @GetMapping("/get/getCartDetails/{id}")
+    public ResponseEntity<List<CartDetails>> getCartDetailsByCustomerId(@PathVariable Long id){
+        return new ResponseEntity<>(cartDetailsService.getDetailsByCustomerId(id), HttpStatus.OK);
+    }
+
 }

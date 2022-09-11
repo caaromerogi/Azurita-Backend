@@ -11,4 +11,12 @@ public interface ICartDetailsService {
     public List<CartDetails> getAllCartDetails();
 
     void deleteCartDetailsByProductId(Long productId);
+
+    void deleteCartDetailsByCustomerId(Long customerId);
+
+    List<CartDetailsDTO> saveListOfItems(List<CartDetailsDTO> cartDetailsDTO);
+
+    List<CartDetails> getDetailsByCustomerId(Long customerId);
+
+
 }
