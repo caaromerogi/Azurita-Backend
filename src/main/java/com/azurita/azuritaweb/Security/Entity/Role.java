@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Role")
@@ -21,6 +22,7 @@ public class Role {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
+
 
     public Role(RoleName roleName) {
         this.roleName = roleName;

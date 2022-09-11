@@ -25,12 +25,7 @@ public class SizeDetails {
     @Enumerated(EnumType.STRING)
     private SizeName size;
 
-    @NotNull
-    @Column(nullable = false)
-    private Integer stock;
-
-    public SizeDetails(SizeName size, Integer stock) {
+    public SizeDetails(SizeName size) {
         this.size = size;
-        this.stock = stock;
     }
 }

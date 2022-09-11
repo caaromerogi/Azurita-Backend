@@ -1,5 +1,6 @@
 package com.azurita.azuritaweb.Entity;
 
+import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,19 +19,19 @@ public class CartDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(nullable = false)
+    private String size;
+
     @ManyToOne
-    @JsonBackReference(value = "product-cartdetails")
+    //@JsonBackReference(value = "product-cartdetails")
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne
-    @JsonBackReference(value = "cart-cartdetails")
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
-
-    @NotNull
-    @Column(nullable = false)
-    private Double unitPrice;
+    @JsonBackReference(value = "customer-cartdetails")
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @NotNull
     @Column(nullable = false)

@@ -1,4 +1,4 @@
-package com.azurita.azuritaweb.Service.Impl;
+package com.azurita.azuritaweb.Security.Service.Impl;
 
 import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.azurita.azuritaweb.Security.Entity.MainCustomer;

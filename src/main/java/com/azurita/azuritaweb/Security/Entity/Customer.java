@@ -1,7 +1,6 @@
 package com.azurita.azuritaweb.Security.Entity;
 
-import com.azurita.azuritaweb.DTO.CartDTO;
-import com.azurita.azuritaweb.Entity.Cart;
+import com.azurita.azuritaweb.Entity.CartDetails;
 import com.azurita.azuritaweb.Entity.PurchaseOrder;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
@@ -53,10 +52,9 @@ public class Customer {
     @JsonManagedReference(value = "customer-purchaseorder")
     private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
 
-    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    @JsonManagedReference(value = "customer-cartdetails")
+    private Set<CartDetails> cartDetails = new HashSet<>();
     public Customer(String name, String lastName, String email, String dni, String password) {
         this.name = name;
         this.lastName = lastName;

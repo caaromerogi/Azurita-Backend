@@ -11,12 +11,9 @@ import lombok.NoArgsConstructor;
 public class SizeDetailsDTO {
     private Long id;
 
-    private Integer stock;
+    private SizeName sizeName;
 
-    private SizeName size;
-
-    public SizeDetailsDTO(Integer stock, SizeName size) {
-        this.stock = stock;
-        this.size = size;
+    public SizeDetailsDTO(SizeName sizeName) {
+        this.sizeName = sizeName;
     }
 }

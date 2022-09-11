@@ -2,7 +2,7 @@ package com.azurita.azuritaweb.Security;
 
 import com.azurita.azuritaweb.Security.JWT.JwtEntryPoint;
 import com.azurita.azuritaweb.Security.JWT.JwtTokenFilter;
-import com.azurita.azuritaweb.Service.Impl.CustomerDetailsService;
+import com.azurita.azuritaweb.Security.Service.Impl.CustomerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +10,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -62,11 +59,9 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/auth/**")
                 .permitAll()
-                .antMatchers("/create/**")
-                .hasRole("ADMIN")
-                .antMatchers("/delete/**")
-                .hasRole("ADMIN")
-                .antMatchers("/update/**")
+                .antMatchers("/get/**")
+                .permitAll()
+                .antMatchers("/cud/**")
                 .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

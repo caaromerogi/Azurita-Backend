@@ -4,6 +4,7 @@ import com.azurita.azuritaweb.Security.Repository.ICustomerRepository;
 import com.azurita.azuritaweb.Security.DTO.CustomerDTO;
 import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.azurita.azuritaweb.Security.Service.ICustomerService;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,6 @@ public class CustomerService implements ICustomerService {
     @Autowired
     ModelMapper modelMapper;
 
-    @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer customer = modelMapper.map(customerDTO, Customer.class);
-        Customer saved = customerRepository.save(customer);
-        CustomerDTO newDTO = modelMapper.map(saved, CustomerDTO.class);
-        return newDTO;
-    }
-
     public Optional<Customer> getByEmail(String email){
         return customerRepository.findByEmail(email);
     }
@@ -35,7 +28,8 @@ public class CustomerService implements ICustomerService {
     public boolean existsByEmail(String email){
         return customerRepository.existsByEmail(email);
     }
-
+    @Override
+    @Transactional
     public Customer saveCustomer(Customer customerDTO){
         return customerRepository.save(customerDTO);
     }

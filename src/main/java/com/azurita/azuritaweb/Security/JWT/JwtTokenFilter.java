@@ -1,6 +1,6 @@
 package com.azurita.azuritaweb.Security.JWT;
 
-import com.azurita.azuritaweb.Service.Impl.CustomerDetailsService;
+import com.azurita.azuritaweb.Security.Service.Impl.CustomerDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

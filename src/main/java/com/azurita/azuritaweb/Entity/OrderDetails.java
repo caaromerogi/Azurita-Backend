@@ -24,7 +24,7 @@ public class OrderDetails {
     private PurchaseOrder purchaseOrder;
 
     @ManyToOne
-    @JsonBackReference(value = "product-orderdetails")
+    //@JsonBackReference(value = "product-orderdetails")
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

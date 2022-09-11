@@ -31,16 +31,16 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonManagedReference(value = "product-cartdetails")
-    private Set<CartDetails> cartDetails = new HashSet<>();
+//    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "product")
+//    @JsonManagedReference(value = "product-cartdetails")
+//    private Set<CartDetails> cartDetails = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "size_id"))
     private Set<SizeDetails> sizeDetails = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    @JsonManagedReference(value = "product-orderdetails")
-    private Set<OrderDetails> orderDetails = new HashSet<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+//    @JsonManagedReference(value = "product-orderdetails")
+//    private Set<OrderDetails> orderDetails = new HashSet<>();
 }
