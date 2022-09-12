@@ -6,10 +6,14 @@ import com.azurita.azuritaweb.Repository.IOrderDetailsRepository;
 import com.azurita.azuritaweb.Service.IOrderDetailsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+@Service
 public class OrderDetailsService implements IOrderDetailsService {
 
     @Autowired
@@ -19,13 +23,7 @@ public class OrderDetailsService implements IOrderDetailsService {
     ModelMapper modelMapper;
 
     @Override
-    public List<OrderDetailsDTO> saveOrderDetails(List<OrderDetailsDTO> orderDetailsDTO) {
-        return null;
+    public Set<OrderDetails> saveOrderDetails(Set<OrderDetails> orderDetails) {
+        return orderDetails.stream().map(orderItem -> orderDetailsRepository.save(orderItem)).collect(Collectors.toSet());
     }
-
-//    @Transactional
-//    @Override
-//    public List<OrderDetailsDTO> saveOrderDetails(List<OrderDetailsDTO> orderDetailsDTO, id) {
-//        return orderDetailsDTO.stream().map(order -> );
-//    }
 }

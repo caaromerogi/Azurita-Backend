@@ -5,8 +5,11 @@ import com.azurita.azuritaweb.Repository.ISizeDetailsRepository;
 import com.azurita.azuritaweb.Security.enums.SizeName;
 import com.azurita.azuritaweb.Service.ISizeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SizeService implements ISizeService {
+
     @Autowired
     ISizeDetailsRepository sizeRepository;
     @Override

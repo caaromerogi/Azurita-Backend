@@ -20,13 +20,11 @@ public class PurchaseOrderDTO {
 
     private String date;
 
-    private Double total;
-
     private String municipality;
 
     private String address;
 
-    private Set<OrderDetailsDTO> orderDetails = new HashSet<>();
-
     private Long customerId;
+
+
 }

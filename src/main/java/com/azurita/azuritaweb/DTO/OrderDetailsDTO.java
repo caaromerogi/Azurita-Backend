@@ -11,13 +11,15 @@ import lombok.NoArgsConstructor;
 public class OrderDetailsDTO {
     private Long id;
 
-    private PurchaseOrder purchaseOrder;
-
     private Long productId;
 
     private String size;
 
-    private Double unitPrice;
+    private String productName;
+
+    private Long purchaseOrderId;
+
+    private Double total;
 
     private Integer quantity;
 }

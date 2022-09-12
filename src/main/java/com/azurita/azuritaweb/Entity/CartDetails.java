@@ -24,12 +24,10 @@ public class CartDetails {
     private String size;
 
     @ManyToOne
-    //@JsonBackReference(value = "product-cartdetails")
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne
-    @JsonBackReference(value = "customer-cartdetails")
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 

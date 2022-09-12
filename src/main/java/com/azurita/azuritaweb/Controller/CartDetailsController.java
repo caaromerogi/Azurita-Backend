@@ -21,12 +21,12 @@ public class CartDetailsController {
     }
 
     //TESTEANDO PERO NO DEBEN SER IMPLEMENTADOS INTERNAMENTE
-    @GetMapping("/get/getAllCartDetails")
+    @GetMapping("/user/getAllCartDetails")
     public ResponseEntity<List<CartDetails>> getAllCartDetails(){
         return new ResponseEntity<>(cartDetailsService.getAllCartDetails(), HttpStatus.OK);
     }
 
-    @GetMapping("/get/getCartDetails/{id}")
+    @GetMapping("/user/getCartDetailsByCustomer/{id}")
     public ResponseEntity<List<CartDetails>> getCartDetailsByCustomerId(@PathVariable Long id){
         return new ResponseEntity<>(cartDetailsService.getDetailsByCustomerId(id), HttpStatus.OK);
     }

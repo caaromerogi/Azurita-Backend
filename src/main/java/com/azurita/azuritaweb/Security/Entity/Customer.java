@@ -20,7 +20,7 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long customerId;
 
     @NotNull
     @Column(nullable = false)
@@ -48,13 +48,13 @@ public class Customer {
             , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> role = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer")
-    @JsonManagedReference(value = "customer-purchaseorder")
-    private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
-    @JsonManagedReference(value = "customer-cartdetails")
-    private Set<CartDetails> cartDetails = new HashSet<>();
+//    @OneToMany(mappedBy = "customer")
+//    @JsonManagedReference(value = "customer-purchaseorder")
+//    private Set<PurchaseOrder> purchaseOrders = new HashSet<>();
+//
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+//    @JsonManagedReference(value = "customer-cartdetails")
+//    private Set<CartDetails> cartDetails = new HashSet<>();
     public Customer(String name, String lastName, String email, String dni, String password) {
         this.name = name;
         this.lastName = lastName;
