@@ -50,10 +50,11 @@ public class PurchaseOrderService implements IPurchaseOrderService {
                     return orderDTO;
                 }).collect(Collectors.toSet());
 
+        resultOrder.setTotal(orderDetailsDTO.stream().mapToDouble(OrderDetailsDTO::getTotal).sum());
+        purchaseOrderRepository.save(resultOrder);
+
         Set<OrderDetails> orderDetails = orderDetailsDTO.stream().map(orderDTO-> modelMapper.map(orderDTO,OrderDetails.class))
                 .collect(Collectors.toSet());
-
-        //FALTA SETEAR EL TOTAL
 
         orderDetailsService.saveOrderDetails(orderDetails);
 
