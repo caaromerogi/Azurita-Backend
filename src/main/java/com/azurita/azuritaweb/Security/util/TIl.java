@@ -20,23 +20,23 @@ public class TIl implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role rolAdmin = new Role(RoleName.ROLE_ADMIN);
-        Role rolUSer = new Role(RoleName.ROLE_USER);
-        roleRepository.save(rolAdmin);
-        roleRepository.save(rolUSer);
-        SizeDetails sizeXS = new SizeDetails(SizeName.XS);
-        SizeDetails sizeS = new SizeDetails(SizeName.S);
-        SizeDetails sizeM = new SizeDetails(SizeName.M);
-        SizeDetails sizeL = new SizeDetails(SizeName.L);
-        SizeDetails sizeXL = new SizeDetails(SizeName.XL);
-        SizeDetails sizeXXL = new SizeDetails(SizeName.XXL);
-
-        sizeRepository.save(sizeXS);
-        sizeRepository.save(sizeS);
-        sizeRepository.save(sizeM);
-        sizeRepository.save(sizeL);
-        sizeRepository.save(sizeXL);
-        sizeRepository.save(sizeXXL);
+//        Role rolAdmin = new Role(RoleName.ROLE_ADMIN);
+//        Role rolUSer = new Role(RoleName.ROLE_USER);
+//        roleRepository.save(rolAdmin);
+//        roleRepository.save(rolUSer);
+//        SizeDetails sizeXS = new SizeDetails(SizeName.XS);
+//        SizeDetails sizeS = new SizeDetails(SizeName.S);
+//        SizeDetails sizeM = new SizeDetails(SizeName.M);
+//        SizeDetails sizeL = new SizeDetails(SizeName.L);
+//        SizeDetails sizeXL = new SizeDetails(SizeName.XL);
+//        SizeDetails sizeXXL = new SizeDetails(SizeName.XXL);
+//
+//        sizeRepository.save(sizeXS);
+//        sizeRepository.save(sizeS);
+//        sizeRepository.save(sizeM);
+//        sizeRepository.save(sizeL);
+//        sizeRepository.save(sizeXL);
+//        sizeRepository.save(sizeXXL);
 
 
     }

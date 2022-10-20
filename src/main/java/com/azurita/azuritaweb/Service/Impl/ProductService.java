@@ -40,6 +40,7 @@ public class ProductService implements IProductService {
     public ResponseProductDTO createProduct(ProductDTO productDTO) {
         Set<String> sizes = productDTO.getSizes();
         Product product = modelMapper.map(productDTO, Product.class);
+        product.setImgPath("../../../assets/images/"+productDTO.getImgPath());
         Set<SizeDetails> sizeDetails = new HashSet<>();
         if(sizes.contains("XS"))
             sizeDetails.add(sizeRepository.findBySize(SizeName.XS));
@@ -72,12 +73,14 @@ public class ProductService implements IProductService {
 
     @Override
     public ResponseProductDTO updateProduct(Long id, ProductDTO productDTO) {
+        //GET PRODUCT TO CHECK IF EXISTS (OBVIOUSLY EXISTS) THEN CHANGE THE FIELDS
         return null;
     }
+
+    //You should enter to the service NOT to the repository
     @Transactional
     @Override
     public void deleteProductById(Long id) {
-        //You should enter to the service NOT to the repository
         cartDetailsRepository.deleteByProductId(id);
         sizeRepository.deleteProductSizeById(id);
         productRepository.deleteById(id);

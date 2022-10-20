@@ -31,7 +31,7 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 
     @Autowired
     ModelMapper modelMapper;
-
+    //crear un purchase order response que tenga los datos necesarios
     @Transactional
     @Override
     public PurchaseOrder createOrder(PurchaseOrderDTO purchaseOrder) {
@@ -59,9 +59,7 @@ public class PurchaseOrderService implements IPurchaseOrderService {
         orderDetailsService.saveOrderDetails(orderDetails);
 
         cartDetailsService.deleteCartDetailsByCustomerId(purchaseOrder.getCustomerId());
-
-        //crear un purchase order response que tenga los datos necesarios
-
+        //Setear el orderDTOResponse
         return resultOrder;
     }
 
