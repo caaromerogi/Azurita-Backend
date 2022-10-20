@@ -88,7 +88,7 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtProvider.generateToken(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+            JwtDTO jwtDTO = new JwtDTO(customerService.getByEmail(loginCustomerDTO.getEmail()).get().getCustomerId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
             return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
         }
         return new ResponseEntity<>(new MessageDTO("Contraseña errada"), HttpStatus.BAD_REQUEST);

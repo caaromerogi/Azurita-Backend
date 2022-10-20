@@ -5,9 +5,19 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 public class JwtDTO {
+    private Long customerId;
     private String token;
     private String bearer = "Bearer";
     private String email;
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
     private Collection<? extends GrantedAuthority> authorities;
 
     public String getToken() {
@@ -42,7 +52,8 @@ public class JwtDTO {
         this.authorities = authorities;
     }
 
-    public JwtDTO(String token, String email, Collection<? extends GrantedAuthority> authorities) {
+    public JwtDTO(Long customerId, String token, String email, Collection<? extends GrantedAuthority> authorities) {
+        this.customerId = customerId;
         this.token = token;
         this.email = email;
         this.authorities = authorities;
