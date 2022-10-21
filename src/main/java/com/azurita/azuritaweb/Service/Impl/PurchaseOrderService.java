@@ -42,11 +42,11 @@ public class PurchaseOrderService implements IPurchaseOrderService {
                 .stream().map(cartItem -> {
                     OrderDetailsDTO orderDTO = new OrderDetailsDTO();
                     orderDTO.setPurchaseOrderId(resultOrder.getPurchaseOrderId());
-                    orderDTO.setProductName(cartItem.getProduct().getName());
-                    orderDTO.setProductId(cartItem.getProduct().getProductId());
+                    orderDTO.setProductName(cartItem.getName());
+                    orderDTO.setProductId(cartItem.getProductId());
                     orderDTO.setQuantity(cartItem.getQuantity());
                     orderDTO.setSize(cartItem.getSize());
-                    orderDTO.setTotal(cartItem.getQuantity()*cartItem.getProduct().getPrice());
+                    orderDTO.setTotal(cartItem.getQuantity()*cartItem.getPrice());
                     return orderDTO;
                 }).collect(Collectors.toSet());
 

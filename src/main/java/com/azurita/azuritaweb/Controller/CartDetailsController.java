@@ -1,6 +1,8 @@
 package com.azurita.azuritaweb.Controller;
 
 import com.azurita.azuritaweb.DTO.CartDetailsDTO;
+import com.azurita.azuritaweb.DTO.CartResponseDTO;
+import com.azurita.azuritaweb.DTO.MessageDTO;
 import com.azurita.azuritaweb.Entity.CartDetails;
 import com.azurita.azuritaweb.Service.ICartDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class CartDetailsController {
     @Autowired
     ICartDetailsService cartDetailsService;
 
-    @PostMapping("/cud/addItemToCart")
+    @PostMapping("/user/addItemToCart")
     public ResponseEntity<CartDetailsDTO> addItemToCart(@RequestBody CartDetailsDTO cartDetailsDTO){
         return new ResponseEntity<>(cartDetailsService.addItem(cartDetailsDTO), HttpStatus.CREATED);
     }
@@ -28,8 +30,13 @@ public class CartDetailsController {
     }
 
     @GetMapping("/user/getCartDetailsByCustomer/{id}")
-    public ResponseEntity<List<CartDetails>> getCartDetailsByCustomerId(@PathVariable Long id){
+    public ResponseEntity<List<CartResponseDTO>> getCartDetailsByCustomerId(@PathVariable Long id){
         return new ResponseEntity<>(cartDetailsService.getDetailsByCustomerId(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/deleteCartItem/{id}/{size}")
+    public ResponseEntity<MessageDTO> deleteCartItem(@PathVariable("id") Long id, @PathVariable("size") String size){
+        return new ResponseEntity<>(cartDetailsService.deleteCartDetailsByProductIdAndSize(id,size), HttpStatus.OK);
     }
 
 }

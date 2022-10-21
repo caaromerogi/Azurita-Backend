@@ -14,6 +14,6 @@ public class SizeService implements ISizeService {
     ISizeDetailsRepository sizeRepository;
     @Override
     public SizeDetails getBySizeName(SizeName sizeName) {
-        return sizeRepository.findBySize(sizeName);
+        return sizeRepository.findBySize(sizeName).get();
     }
 }

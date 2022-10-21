@@ -61,6 +61,8 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
                 .permitAll()
                 .antMatchers("/get/**")
                 .permitAll()
+                .antMatchers("/user/**")
+                .hasAnyRole("USER", "ADMIN")
                 .antMatchers("/cud/**")
                 .hasRole("ADMIN")
                 .anyRequest()

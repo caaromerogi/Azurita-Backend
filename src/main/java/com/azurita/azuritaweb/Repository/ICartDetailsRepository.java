@@ -8,19 +8,30 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 @Repository
 public interface ICartDetailsRepository extends JpaRepository<CartDetails, Long> {
-    @Query(value = "SELECT * FROM cart_details WHERE customer_id =:customerId AND product_id=:productId",
+    @Query(value = "SELECT * FROM cart_details WHERE customer_id =:customerId AND product_id=:productId AND size=:size",
             nativeQuery = true)
-    Optional<CartDetails> findByCustomerAndProductId(@Param("customerId") Long customerId, @Param("productId") Long productId);
+    Optional<CartDetails> findByCustomerAndProductId(@Param("customerId") Long customerId,
+                                                     @Param("productId") Long productId,
+                                                     @Param("size") String size);
 
 //    @Query(value = "SELECT * FROM product WHERE product_id=:productId", nativeQuery = true)
 //    Optional<ResponseProductDTO> findByProductId(@Param("productId") Long productId);
 
     @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM cart_details WHERE product_id =:productId AND size=:size",
+            nativeQuery = true)
+    void deleteByProductIdAndSize(@Param("productId") Long productId,
+                                  @Param("size") String size);
+
+    @Modifying
+    @Transactional
     @Query(value = "DELETE FROM cart_details WHERE product_id =:productId",
             nativeQuery = true)
     void deleteByProductId(@Param("productId") Long productId);

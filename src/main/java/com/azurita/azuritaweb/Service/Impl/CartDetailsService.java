@@ -1,6 +1,8 @@
 package com.azurita.azuritaweb.Service.Impl;
 
 import com.azurita.azuritaweb.DTO.CartDetailsDTO;
+import com.azurita.azuritaweb.DTO.CartResponseDTO;
+import com.azurita.azuritaweb.DTO.MessageDTO;
 import com.azurita.azuritaweb.DTO.ResponseProductDTO;
 import com.azurita.azuritaweb.Entity.CartDetails;
 import com.azurita.azuritaweb.Repository.ICartDetailsRepository;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,14 +29,17 @@ public class CartDetailsService implements ICartDetailsService {
     @Override
     public CartDetailsDTO addItem(CartDetailsDTO cartDetailsDTO) {
         if(cartDetailsRepository.findByCustomerAndProductId(cartDetailsDTO.getCustomerId(),
-                cartDetailsDTO.getProductId()).isPresent()) {
+                cartDetailsDTO.getProductId(), cartDetailsDTO.getSize()).isPresent()
+
+        && Objects.equals(cartDetailsRepository.findByCustomerAndProductId(cartDetailsDTO.getCustomerId(),
+                cartDetailsDTO.getProductId(),cartDetailsDTO.getSize()).get().getSize(), cartDetailsDTO.getSize()))
+        {
             CartDetails cart = cartDetailsRepository.findByCustomerAndProductId(cartDetailsDTO.getCustomerId(),
-                    cartDetailsDTO.getProductId()).get();
-            cart.setQuantity(cart.getQuantity() + 1);
+                    cartDetailsDTO.getProductId(),cartDetailsDTO.getSize()).get();
+            cart.setQuantity(cart.getQuantity() + cartDetailsDTO.getQuantity());
             return modelMapper.map(cartDetailsRepository.save(cart), CartDetailsDTO.class);
         }
 
-        cartDetailsDTO.setQuantity(1);
         CartDetails cart = modelMapper.map(cartDetailsDTO, CartDetails.class);
         return modelMapper.map(cartDetailsRepository.save(cart), CartDetailsDTO.class);
     }
@@ -44,8 +50,9 @@ public class CartDetailsService implements ICartDetailsService {
     }
 
     @Override
-    public void deleteCartDetailsByProductId(Long productId) {
-        cartDetailsRepository.deleteByProductId(productId);
+    public MessageDTO deleteCartDetailsByProductIdAndSize(Long productId, String size) {
+        cartDetailsRepository.deleteByProductIdAndSize(productId, size);
+        return new MessageDTO("Item "+productId +" deleted");
     }
 
     @Override
@@ -63,8 +70,19 @@ public class CartDetailsService implements ICartDetailsService {
     }
 
     @Override
-    public List<CartDetails> getDetailsByCustomerId(Long customerId) {
-        return cartDetailsRepository.findByCustomerId(customerId);
+    public List<CartResponseDTO> getDetailsByCustomerId(Long customerId) {
+        return cartDetailsRepository.findByCustomerId(customerId)
+                .stream()
+                .map(item -> {
+                    CartResponseDTO cartResponse = new CartResponseDTO();
+                    cartResponse.setProductId(item.getProduct().getProductId());
+                    cartResponse.setName(item.getProduct().getName());
+                    cartResponse.setPrice(item.getProduct().getPrice());
+                    cartResponse.setImgPath(item.getProduct().getImgPath());
+                    cartResponse.setSize(item.getSize());
+                    cartResponse.setQuantity(item.getQuantity());
+                    return cartResponse;
+                }).collect(Collectors.toList());
     }
 
 

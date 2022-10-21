@@ -43,17 +43,17 @@ public class ProductService implements IProductService {
         product.setImgPath("../../../assets/images/"+productDTO.getImgPath());
         Set<SizeDetails> sizeDetails = new HashSet<>();
         if(sizes.contains("XS"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.XS));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.XS).get());
         if(sizes.contains("S"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.S));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.S).get());
         if(sizes.contains("M"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.M));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.M).get());
         if(sizes.contains("L"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.L));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.L).get());
         if(sizes.contains("XL"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.XL));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.XL).get());
         if (sizes.contains("XXL"))
-            sizeDetails.add(sizeRepository.findBySize(SizeName.XXL));
+            sizeDetails.add(sizeRepository.findBySize(SizeName.XXL).get());
 
         product.setSizeDetails(sizeDetails);
         return modelMapper.map(productRepository.save(product), ResponseProductDTO.class);

@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ISizeDetailsRepository extends JpaRepository<SizeDetails, Long> {
-    SizeDetails findBySize(SizeName sizeName);
+    Optional<SizeDetails> findBySize(SizeName sizeName);
 
     @Modifying
     @Query(value = "DELETE FROM product_size WHERE product_id =:id",
