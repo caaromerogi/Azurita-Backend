@@ -20,9 +20,6 @@ public interface ICartDetailsRepository extends JpaRepository<CartDetails, Long>
                                                      @Param("productId") Long productId,
                                                      @Param("size") String size);
 
-//    @Query(value = "SELECT * FROM product WHERE product_id=:productId", nativeQuery = true)
-//    Optional<ResponseProductDTO> findByProductId(@Param("productId") Long productId);
-
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM cart_details WHERE product_id =:productId AND size=:size",

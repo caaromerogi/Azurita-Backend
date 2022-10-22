@@ -1,16 +1,16 @@
 package com.azurita.azuritaweb.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
@@ -31,8 +31,14 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "product")
+    @JsonIgnore
+    Set<OrderDetails> orderDetails = new HashSet<>() ;
+
+
+    @ManyToMany
     @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "size_id"))
     private Set<SizeDetails> sizeDetails = new HashSet<>();
+
 }

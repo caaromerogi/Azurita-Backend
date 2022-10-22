@@ -8,4 +8,8 @@ import java.util.Set;
 
 public interface IOrderDetailsService {
     Set<OrderDetails> saveOrderDetails(Set<OrderDetails> orderDetails);
+
+    Set<OrderDetails> updateOrderDetails(Long productId);
+    OrderDetails saveOrderDetail(OrderDetails order);
+    List<OrderDetails> getOrderDetails(Long orderId);
 }

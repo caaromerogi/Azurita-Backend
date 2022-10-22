@@ -7,9 +7,12 @@ import com.azurita.azuritaweb.Entity.Product;
 import com.azurita.azuritaweb.Entity.SizeDetails;
 import com.azurita.azuritaweb.Repository.ICartDetailsRepository;
 import com.azurita.azuritaweb.Repository.IProductRepository;
+import com.azurita.azuritaweb.Repository.IPurchaseOrderRepository;
 import com.azurita.azuritaweb.Repository.ISizeDetailsRepository;
 import com.azurita.azuritaweb.Security.enums.SizeName;
+import com.azurita.azuritaweb.Service.IOrderDetailsService;
 import com.azurita.azuritaweb.Service.IProductService;
+import com.azurita.azuritaweb.Service.IPurchaseOrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 public class ProductService implements IProductService {
     @Autowired
     IProductRepository productRepository;
+
+    @Autowired
+    IOrderDetailsService orderDetailsService;
 
     @Autowired
     ISizeDetailsRepository sizeRepository;
@@ -83,6 +89,7 @@ public class ProductService implements IProductService {
     public void deleteProductById(Long id) {
         cartDetailsRepository.deleteByProductId(id);
         sizeRepository.deleteProductSizeById(id);
+        orderDetailsService.updateOrderDetails(id);
         productRepository.deleteById(id);
     }
 }

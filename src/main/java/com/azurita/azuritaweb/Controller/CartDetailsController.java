@@ -39,4 +39,9 @@ public class CartDetailsController {
         return new ResponseEntity<>(cartDetailsService.deleteCartDetailsByProductIdAndSize(id,size), HttpStatus.OK);
     }
 
+    @PostMapping("/user/saveItems")
+    public ResponseEntity<List<CartDetailsDTO>> saveCartItems(@RequestBody List<CartDetailsDTO> cartItems){
+        return new ResponseEntity<>(cartDetailsService.saveListOfItems(cartItems), HttpStatus.OK);
+    }
+
 }

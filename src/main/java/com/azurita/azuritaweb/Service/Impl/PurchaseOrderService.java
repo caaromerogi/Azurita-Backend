@@ -6,6 +6,7 @@ import com.azurita.azuritaweb.DTO.PurchaseOrderDTO;
 import com.azurita.azuritaweb.Entity.CartDetails;
 import com.azurita.azuritaweb.Entity.OrderDetails;
 import com.azurita.azuritaweb.Entity.PurchaseOrder;
+import com.azurita.azuritaweb.Repository.IOrderDetailsRepository;
 import com.azurita.azuritaweb.Repository.IPurchaseOrderRepository;
 import com.azurita.azuritaweb.Service.ICartDetailsService;
 import com.azurita.azuritaweb.Service.IOrderDetailsService;
@@ -27,11 +28,11 @@ public class PurchaseOrderService implements IPurchaseOrderService {
     IOrderDetailsService orderDetailsService;
 
     @Autowired
-    ICartDetailsService cartDetailsService; //traer la info al orderdetails y luego borrarla
+    ICartDetailsService cartDetailsService;
 
     @Autowired
     ModelMapper modelMapper;
-    //crear un purchase order response que tenga los datos necesarios
+
     @Transactional
     @Override
     public PurchaseOrder createOrder(PurchaseOrderDTO purchaseOrder) {
@@ -59,8 +60,12 @@ public class PurchaseOrderService implements IPurchaseOrderService {
         orderDetailsService.saveOrderDetails(orderDetails);
 
         cartDetailsService.deleteCartDetailsByCustomerId(purchaseOrder.getCustomerId());
-        //Setear el orderDTOResponse
+
         return resultOrder;
+    }
+
+    public List<OrderDetails> getOrderDetails(Long orderId){
+        return orderDetailsService.getOrderDetails(orderId);
     }
 
     @Override

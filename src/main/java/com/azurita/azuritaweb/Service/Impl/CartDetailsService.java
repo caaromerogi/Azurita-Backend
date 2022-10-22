@@ -63,6 +63,7 @@ public class CartDetailsService implements ICartDetailsService {
     @Transactional
     @Override
     public List<CartDetailsDTO> saveListOfItems(List<CartDetailsDTO> cartDetailsDTO) {
+        deleteCartDetailsByCustomerId(cartDetailsDTO.get(0).getCustomerId());
         return cartDetailsDTO.stream().map(cartDetails -> {
             CartDetails modifiedCartItem = modelMapper.map(cartDetails, CartDetails.class);
             return modelMapper.map(cartDetailsRepository.save(modifiedCartItem), CartDetailsDTO.class);

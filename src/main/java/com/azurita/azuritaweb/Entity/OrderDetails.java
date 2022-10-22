@@ -3,9 +3,7 @@ package com.azurita.azuritaweb.Entity;
 import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,7 +11,8 @@ import javax.persistence.*;
 @Table(name = "OrderDetails")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +34,8 @@ public class OrderDetails {
     @Column(nullable = false)
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", nullable = true)
     private Product product;
 
     @ManyToOne

@@ -40,4 +40,5 @@ public class PurchaseOrder {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+
 }
