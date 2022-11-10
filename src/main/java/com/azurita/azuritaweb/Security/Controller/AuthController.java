@@ -9,6 +9,7 @@ import com.azurita.azuritaweb.Security.Service.ICustomerService;
 import com.azurita.azuritaweb.Security.Service.Impl.CustomerService;
 import com.azurita.azuritaweb.Security.Service.Impl.RoleService;
 import com.azurita.azuritaweb.Security.enums.RoleName;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;

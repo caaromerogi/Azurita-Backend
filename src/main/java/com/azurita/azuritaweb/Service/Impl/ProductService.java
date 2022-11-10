@@ -13,6 +13,7 @@ import com.azurita.azuritaweb.Security.enums.SizeName;
 import com.azurita.azuritaweb.Service.IOrderDetailsService;
 import com.azurita.azuritaweb.Service.IProductService;
 import com.azurita.azuritaweb.Service.IPurchaseOrderService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ProductService implements IProductService {
     @Autowired
     IProductRepository productRepository;

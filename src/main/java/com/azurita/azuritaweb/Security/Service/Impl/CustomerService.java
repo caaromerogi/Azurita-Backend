@@ -5,6 +5,7 @@ import com.azurita.azuritaweb.Security.DTO.CustomerDTO;
 import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.azurita.azuritaweb.Security.Service.ICustomerService;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,11 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CustomerService implements ICustomerService {
 
     @Autowired
     ICustomerRepository customerRepository;
-    @Autowired
-    ModelMapper modelMapper;
 
     public Optional<Customer> getByEmail(String email){
         return customerRepository.findByEmail(email);
