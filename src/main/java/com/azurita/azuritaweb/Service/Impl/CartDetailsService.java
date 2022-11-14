@@ -8,6 +8,7 @@ import com.azurita.azuritaweb.Entity.CartDetails;
 import com.azurita.azuritaweb.Repository.ICartDetailsRepository;
 import com.azurita.azuritaweb.Service.ICartDetailsService;
 import com.azurita.azuritaweb.Service.IProductService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CartDetailsService implements ICartDetailsService {
     @Autowired
     ICartDetailsRepository cartDetailsRepository;

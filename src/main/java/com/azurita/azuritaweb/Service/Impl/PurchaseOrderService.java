@@ -11,6 +11,7 @@ import com.azurita.azuritaweb.Repository.IPurchaseOrderRepository;
 import com.azurita.azuritaweb.Service.ICartDetailsService;
 import com.azurita.azuritaweb.Service.IOrderDetailsService;
 import com.azurita.azuritaweb.Service.IPurchaseOrderService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 @Service
+@AllArgsConstructor
 public class PurchaseOrderService implements IPurchaseOrderService {
     @Autowired
     IPurchaseOrderRepository purchaseOrderRepository;
