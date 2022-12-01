@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,9 @@ public class CustomerService implements ICustomerService {
             return null;
         }
         return getByEmail(email).stream().findFirst().get().getPassword();
+    }
+
+    public List<Customer> getAllCustomers(){
+        return customerRepository.findAll();
     }
 }

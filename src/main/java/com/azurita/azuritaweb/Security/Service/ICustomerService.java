@@ -5,6 +5,7 @@ import com.azurita.azuritaweb.Security.Entity.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -15,4 +16,6 @@ public interface ICustomerService {
     public Optional<Customer> getByEmail(String email);
 
     public boolean existsByEmail(String email);
+
+    public List<Customer> getAllCustomers();
 }

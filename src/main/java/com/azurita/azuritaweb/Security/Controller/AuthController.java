@@ -63,7 +63,7 @@ public class AuthController {
                 );
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getByRoleName(RoleName.ROLE_USER));
-        if(newCustomerDTO.getRoles().contains("admin")){
+        if(customerService.getAllCustomers().size() == 0){
             roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN));
         }
 

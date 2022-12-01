@@ -2,13 +2,21 @@ package com.azurita.azuritaweb.Security.util;
 
 import com.azurita.azuritaweb.Entity.SizeDetails;
 import com.azurita.azuritaweb.Repository.ISizeDetailsRepository;
+import com.azurita.azuritaweb.Security.Controller.AuthController;
+import com.azurita.azuritaweb.Security.Entity.Customer;
 import com.azurita.azuritaweb.Security.Entity.Role;
+import com.azurita.azuritaweb.Security.Repository.ICustomerRepository;
 import com.azurita.azuritaweb.Security.Repository.IRoleRepository;
+import com.azurita.azuritaweb.Security.Service.ICustomerService;
 import com.azurita.azuritaweb.Security.enums.RoleName;
 import com.azurita.azuritaweb.Security.enums.SizeName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
+
 @Component
 public class DefaultValues implements CommandLineRunner {
 
@@ -17,6 +25,12 @@ public class DefaultValues implements CommandLineRunner {
 
     @Autowired
     ISizeDetailsRepository sizeRepository;
+
+    @Autowired
+    ICustomerRepository customerRepository;
+
+    @Autowired
+    ICustomerService customerService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -61,6 +75,5 @@ public class DefaultValues implements CommandLineRunner {
             sizeRepository.save(sizeXXL);
         }
 
-        //TODO Create default admin email
     }
 }
