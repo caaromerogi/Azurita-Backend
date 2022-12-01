@@ -61,5 +61,6 @@ public class DefaultValues implements CommandLineRunner {
             sizeRepository.save(sizeXXL);
         }
 
+        //TODO Create default admin email
     }
 }

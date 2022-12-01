@@ -48,7 +48,7 @@ public class ProductService implements IProductService {
     public ResponseProductDTO createProduct(ProductDTO productDTO) {
         Set<String> sizes = productDTO.getSizes();
         Product product = modelMapper.map(productDTO, Product.class);
-        product.setImgPath("../../../assets/images/"+productDTO.getImgPath());
+        product.setImgPath(productDTO.getImgPath());
         Set<SizeDetails> sizeDetails = new HashSet<>();
         if(sizes.contains("XS"))
             sizeDetails.add(sizeRepository.findBySize(SizeName.XS).get());
@@ -85,7 +85,6 @@ public class ProductService implements IProductService {
         return null;
     }
 
-    //You should enter to the service NOT to the repository
     @Transactional
     @Override
     public void deleteProductById(Long id) {

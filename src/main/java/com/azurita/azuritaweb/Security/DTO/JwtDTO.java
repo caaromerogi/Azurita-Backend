@@ -10,6 +10,8 @@ public class JwtDTO {
     private String bearer = "Bearer";
     private String email;
 
+    private Collection<? extends GrantedAuthority> authorities;
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -17,8 +19,6 @@ public class JwtDTO {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
-
-    private Collection<? extends GrantedAuthority> authorities;
 
     public String getToken() {
         return token;
